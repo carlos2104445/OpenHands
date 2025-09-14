@@ -19,6 +19,7 @@ from openhands.agenthub.loc_agent.tools import (
 )
 from openhands.core.exceptions import (
     FunctionCallNotExistsError,
+    FunctionCallValidationError,
 )
 from openhands.core.logger import openhands_logger as logger
 from openhands.events.action import (
@@ -56,7 +57,7 @@ def response_to_actions(
             try:
                 arguments = json.loads(tool_call.function.arguments)
             except json.decoder.JSONDecodeError as e:
-                raise RuntimeError(
+                raise FunctionCallValidationError(
                     f'Failed to parse tool call arguments: {tool_call.function.arguments}'
                 ) from e
 

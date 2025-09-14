@@ -238,7 +238,7 @@ async def run_controller(
             file_path = config.save_trajectory_path
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         histories = controller.get_trajectory(config.save_screenshots_in_trajectory)
-        with open(file_path, 'w') as f:  # noqa: ASYNC101
+        with open(file_path, 'w') as f:
             json.dump(histories, f, indent=4)
 
     return state
@@ -264,7 +264,7 @@ def load_replay_log(trajectory_path: str) -> tuple[list[Event] | None, Action]:
     """Load trajectory from given path, serialize it to a list of events, and return
     two things:
     1) A list of events except the first action
-    2) First action (user message, a.k.a. initial task)
+    2) First action (user message, a.k.a. initial task).
     """
     try:
         path = Path(trajectory_path).resolve()
