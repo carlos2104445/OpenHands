@@ -15,7 +15,7 @@ def test_ps1_metadata_format():
     print(prompt)
     assert prompt.startswith('\n###PS1JSON###\n')
     assert prompt.endswith('\n###PS1END###\n')
-    assert '"exit_code"' in prompt, 'PS1 prompt should contain double quotes'
+    assert r'\"exit_code\"' in prompt, 'PS1 prompt should contain escaped double quotes'
 
 
 def test_ps1_metadata_json_structure():
