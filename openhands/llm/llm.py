@@ -71,7 +71,9 @@ class LLM(RetryMixin, DebugMixin):
 
         Args:
             config: The LLM configuration.
+            service_id: Unique identifier for this LLM service instance.
             metrics: The metrics to use.
+            retry_listener: Optional callback function for retry events.
         """
         self._tried_model_info = False
         self.cost_metric_supported: bool = True
@@ -538,7 +540,6 @@ class LLM(RetryMixin, DebugMixin):
         Returns:
             bool: True if model is vision capable. Return False if model not supported by litellm.
         """
-
         # Allow manual override via environment variable
         if os.getenv('OPENHANDS_FORCE_VISION', '').lower() in (
             '1',

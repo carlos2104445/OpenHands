@@ -80,6 +80,7 @@ def split_bash_commands(commands: str) -> list[str]:
 
 def escape_bash_special_chars(command: str) -> str:
     r"""Escapes characters that have different interpretations in bash vs python.
+
     Specifically handles escape sequences like \;, \|, \&, etc.
     """
     if command.strip() == '':

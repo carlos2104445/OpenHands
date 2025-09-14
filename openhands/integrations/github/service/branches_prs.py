@@ -7,12 +7,10 @@ from openhands.integrations.service_types import Branch, PaginatedBranchesRespon
 
 
 class GitHubBranchesMixin(GitHubMixinBase):
-    """
-    Methods for interacting with branches for a repo
-    """
+    """Methods for interacting with branches for a repo."""
 
     async def get_branches(self, repository: str) -> list[Branch]:
-        """Get branches for a repository"""
+        """Get branches for a repository."""
         url = f'{self.BASE_URL}/repos/{repository}/branches'
 
         # Set maximum branches to fetch (100 per page)
@@ -60,7 +58,7 @@ class GitHubBranchesMixin(GitHubMixinBase):
     async def get_paginated_branches(
         self, repository: str, page: int = 1, per_page: int = 30
     ) -> PaginatedBranchesResponse:
-        """Get branches for a repository with pagination"""
+        """Get branches for a repository with pagination."""
         url = f'{self.BASE_URL}/repos/{repository}/branches'
 
         params = {'per_page': str(per_page), 'page': str(page)}

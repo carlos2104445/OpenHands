@@ -17,9 +17,7 @@ from openhands.integrations.service_types import (
 
 
 class BitBucketMixinBase(BaseGitService, HTTPClient):
-    """
-    Base mixin for BitBucket service containing common functionality
-    """
+    """Base mixin for BitBucket service containing common functionality."""
 
     BASE_URL = 'https://api.bitbucket.org/2.0'
 

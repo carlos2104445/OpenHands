@@ -12,9 +12,7 @@ from openhands.integrations.service_types import Comment
 
 
 class GitHubResolverMixin(GitHubMixinBase):
-    """
-    Helper methods used for the GitHub Resolver
-    """
+    """Helper methods used for the GitHub Resolver."""
 
     async def get_issue_or_pr_title_and_body(
         self, repository: str, issue_number: int
@@ -42,7 +40,7 @@ class GitHubResolverMixin(GitHubMixinBase):
         Args:
             repository: Repository name in format 'owner/repo'
             issue_number: The issue number
-            discussion_id: Not used for GitHub (kept for compatibility with GitLab)
+            max_comments: Maximum number of comments to retrieve (default: 10)
 
         Returns:
             List of Comment objects ordered by creation date
@@ -83,13 +81,12 @@ class GitHubResolverMixin(GitHubMixinBase):
 
         Args:
             comment_id: The GraphQL node ID of any comment in the thread
-            repo: Repository name
+            repository: Repository name in format 'owner/repo'
             pr_number: Pull request number
 
         Returns:
             List of Comment objects representing the entire thread
         """
-
         # Step 1: Use existing GraphQL query to get the comment and check for replyTo
         variables = {'commentId': comment_id}
         data = await self.execute_graphql_query(

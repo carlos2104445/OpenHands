@@ -23,7 +23,7 @@ async def get_trajectory(
     This function retrieves the current trajectory and returns it.
 
     Args:
-        request (Request): The incoming request object.
+        conversation: The server conversation instance for this request.
 
     Returns:
         JSONResponse: A JSON response containing the trajectory as a list of

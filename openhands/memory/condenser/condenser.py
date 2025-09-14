@@ -152,6 +152,7 @@ class Condenser(ABC):
 
         Args:
             config: Configuration for the condenser.
+            llm_registry: Registry containing available LLM instances.
 
         Returns:
             Condenser: A condenser instance.

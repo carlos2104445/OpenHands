@@ -26,8 +26,7 @@ from openhands.runtime.impl.cli.cli_runtime import CLIRuntime
 
 
 def convert_mcp_clients_to_tools(mcp_clients: list[MCPClient] | None) -> list[dict]:
-    """Converts a list of MCPClient instances to ChatCompletionToolParam format
-    that can be used by CodeActAgent.
+    """Converts a list of MCPClient instances to ChatCompletionToolParam format that can be used by CodeActAgent.
 
     Args:
         mcp_clients: List of MCPClient instances or None

@@ -46,6 +46,7 @@ class TokenUsage(BaseModel):
 
 class Metrics:
     """Metrics class can record various metrics during running and evaluation.
+
     We track:
       - accumulated_cost and costs
       - max_budget_per_task (budget limit)

@@ -58,8 +58,7 @@ class GitHandler:
         return script_file
 
     def get_current_branch(self) -> str | None:
-        """
-        Retrieves the current branch name of the git repository.
+        """Retrieves the current branch name of the git repository.
 
         Returns:
             str | None: The current branch name, or None if not a git repository or error occurs.
@@ -81,6 +80,7 @@ class GitHandler:
 
     def get_git_changes(self) -> list[dict[str, str]] | None:
         """Retrieves the list of changed files in Git repositories.
+
         Examines each direct subdirectory of the workspace directory looking for git repositories
         and returns the changes for each of these directories.
         Optimized to use a single git command per repository for maximum performance.

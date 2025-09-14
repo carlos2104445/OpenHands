@@ -130,7 +130,7 @@ class MCPProxyManager:
 
         Args:
             app: FastAPI application to mount to
-            tools: List of tool configurations
+            stdio_servers: List of MCP stdio server configurations
             allow_origins: List of allowed origins for CORS
         """
         tools = {t.name: t.model_dump() for t in stdio_servers}

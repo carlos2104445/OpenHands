@@ -16,7 +16,7 @@ FILES_TO_IGNORE = [
 
 
 def sanitize_filename(filename: str) -> str:
-    """Sanitize the filename to prevent directory traversal"""
+    """Sanitize the filename to prevent directory traversal."""
     # Remove any directory components
     filename = os.path.basename(filename)
     # Remove any non-alphanumeric characters except for .-_
@@ -114,9 +114,10 @@ def is_extension_allowed(filename: str) -> bool:
 
 
 def get_unique_filename(filename: str, folder_path: str) -> str:
-    """Returns unique filename on given folder_path. By checking if the given
-     filename exists. If it doesn't, filename is simply returned.
-     Otherwise, it append copy(#number) until the filename is unique.
+    """Returns unique filename on given folder_path.
+
+    By checking if the given filename exists. If it doesn't, filename is simply returned.
+    Otherwise, it append copy(#number) until the filename is unique.
 
     Args:
         filename (str): The name of the file to check.

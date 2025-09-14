@@ -3,9 +3,10 @@ from openhands.llm.metrics import Metrics, TokenUsage
 
 
 def get_token_usage_for_event(event: Event, metrics: Metrics) -> TokenUsage | None:
-    """Returns at most one token usage record for either:
+    """Returns at most one token usage record for either.
+
       - `tool_call_metadata.model_response.id`, if possible
-      - otherwise event.response_id, if set
+      - otherwise event.response_id, if set.
 
     If neither exist or none matches in metrics.token_usages, returns None.
     """
@@ -33,8 +34,9 @@ def get_token_usage_for_event(event: Event, metrics: Metrics) -> TokenUsage | No
 def get_token_usage_for_event_id(
     events: list[Event], event_id: int, metrics: Metrics
 ) -> TokenUsage | None:
-    """Starting from the event with .id == event_id and moving backwards in `events`,
-    find the first TokenUsage record (if any) associated either with:
+    """Starting from the event with .id == event_id and moving backwards in `events`.
+
+    Find the first TokenUsage record (if any) associated either with:
       - tool_call_metadata.model_response.id, or
       - event.response_id
     Returns the first match found, or None if none is found.

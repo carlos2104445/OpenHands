@@ -1,4 +1,5 @@
 """This is the main file for the runtime client.
+
 It is responsible for executing actions received from OpenHands backend and producing observations.
 
 NOTE: this will be executed inside the docker sandbox.
@@ -165,6 +166,7 @@ def _execute_file_editor(
 
 class ActionExecutor:
     """ActionExecutor is running inside docker sandbox.
+
     It is responsible for executing actions received from OpenHands backend and producing observations.
     """
 

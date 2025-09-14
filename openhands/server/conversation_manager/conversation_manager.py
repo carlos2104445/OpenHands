@@ -102,7 +102,7 @@ class ConversationManager(ABC):
         initial_user_msg: MessageAction | None = None,
         replay_json: str | None = None,
     ) -> AgentLoopInfo:
-        """Start an event loop if one is not already running"""
+        """Start an event loop if one is not already running."""
 
     @abstractmethod
     async def send_to_event_stream(self, connection_id: str, data: dict):
@@ -145,7 +145,7 @@ class ConversationManager(ABC):
         llm_config: LLMConfig,
         messages: list[dict[str, str]],
     ) -> str:
-        """Request extraneous llm completions for a conversation"""
+        """Request extraneous llm completions for a conversation."""
 
     @classmethod
     @abstractmethod
@@ -157,4 +157,4 @@ class ConversationManager(ABC):
         server_config: ServerConfig,
         monitoring_listener: MonitoringListener,
     ) -> ConversationManager:
-        """Get a conversation manager instance"""
+        """Get a conversation manager instance."""

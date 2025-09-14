@@ -3,12 +3,10 @@ from openhands.integrations.service_types import Branch, PaginatedBranchesRespon
 
 
 class GitLabBranchesMixin(GitLabMixinBase):
-    """
-    Methods for interacting with GitLab branches
-    """
+    """Methods for interacting with GitLab branches."""
 
     async def get_branches(self, repository: str) -> list[Branch]:
-        """Get branches for a repository"""
+        """Get branches for a repository."""
         encoded_name = repository.replace('/', '%2F')
         url = f'{self.BASE_URL}/projects/{encoded_name}/repository/branches'
 
@@ -48,7 +46,7 @@ class GitLabBranchesMixin(GitLabMixinBase):
     async def get_paginated_branches(
         self, repository: str, page: int = 1, per_page: int = 30
     ) -> PaginatedBranchesResponse:
-        """Get branches for a repository with pagination"""
+        """Get branches for a repository with pagination."""
         encoded_name = repository.replace('/', '%2F')
         url = f'{self.BASE_URL}/projects/{encoded_name}/repository/branches'
 

@@ -26,6 +26,7 @@ async def security_api(
 
     Args:
         request (Request): The incoming FastAPI request object.
+        conversation: The server conversation instance for this request.
 
     Returns:
         Response: The response from the security analyzer.

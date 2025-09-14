@@ -261,6 +261,8 @@ def send_pull_request(
         reviewer: The username of the reviewer to assign
         pr_title: Custom title for the pull request (optional)
         base_domain: The base domain for the git server (defaults to "github.com" for GitHub, "gitlab.com" for GitLab, and "bitbucket.org" for Bitbucket)
+        git_user_name: The git user name to use for commits (defaults to 'openhands')
+        git_user_email: The git user email to use for commits (defaults to 'openhands@all-hands.dev')
     """
     if pr_type not in ['branch', 'draft', 'ready']:
         raise ValueError(f'Invalid pr_type: {pr_type}')

@@ -23,6 +23,7 @@ async def generate_conversation_title(
     Args:
         message: The first user message in the conversation.
         llm_config: The LLM configuration to use for generating the title.
+        llm_registry: Registry containing available LLM instances.
         max_length: The maximum length of the generated title.
 
     Returns:
@@ -84,11 +85,15 @@ async def auto_generate_title(
     llm_registry: LLMRegistry,
 ) -> str:
     """Auto-generate a title for a conversation based on the first user message.
+
     Uses LLM-based title generation if available, otherwise falls back to a simple truncation.
 
     Args:
         conversation_id: The ID of the conversation
         user_id: The ID of the user
+        file_store: File storage instance for accessing conversation data
+        settings: User settings containing LLM configuration
+        llm_registry: Registry containing available LLM instances
 
     Returns:
         A generated title string

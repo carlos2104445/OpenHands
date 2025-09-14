@@ -71,7 +71,7 @@ class ReadOnlyAgent(CodeActAgent):
         """Sets the list of MCP tools for the agent.
 
         Args:
-        - mcp_tools (list[dict]): The list of MCP tools.
+            mcp_tools: The list of MCP tools to set for the agent.
         """
         logger.warning(
             'ReadOnlyAgent does not support MCP tools. MCP tools will be ignored by the agent.'

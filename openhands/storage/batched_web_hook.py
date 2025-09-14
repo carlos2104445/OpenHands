@@ -177,15 +177,16 @@ class BatchedWebHookFileStore(FileStore):
 
     def _enqueue_batch_from_timer(self) -> None:
         """Send the batch from the timer thread.
+
         This method is called by the timer and submits the actual sending to the executor.
         """
         with self._batch_lock:
             self._enqueue_batch_from_lock()
 
     def _enqueue_batch_from_lock(self, background=True) -> None:
-        """
-        Must have lock before calling. Will reset the batch state and send the current one.
-        Uses executor by default, but can perform synchronously by setting background=False
+        """Must have lock before calling. Will reset the batch state and send the current one.
+
+        Uses executor by default, but can perform synchronously by setting background=False.
         """
         batch_to_send = self._batch
         self._batch = {}
@@ -203,6 +204,7 @@ class BatchedWebHookFileStore(FileStore):
         self, batch_to_send: dict[str, tuple[str, str | bytes | None]]
     ) -> None:
         """Send the current batch of updates to the webhook as a single request.
+
         This method acquires the batch lock and processes all pending updates in one batch.
         """
         # Process the entire batch in a single request
@@ -261,6 +263,7 @@ class BatchedWebHookFileStore(FileStore):
 
     def flush(self) -> None:
         """Immediately send any pending updates to the webhook.
+
         This can be called to ensure all updates are sent before shutting down.
         """
         with self._batch_lock:

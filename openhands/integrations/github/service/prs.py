@@ -4,9 +4,7 @@ from openhands.integrations.service_types import RequestMethod
 
 
 class GitHubPRsMixin(GitHubMixinBase):
-    """
-    Methods for interacting with GitHub PRs
-    """
+    """Methods for interacting with GitHub PRs."""
 
     async def create_pr(
         self,
@@ -18,7 +16,7 @@ class GitHubPRsMixin(GitHubMixinBase):
         draft: bool = True,
         labels: list[str] | None = None,
     ) -> str:
-        """Creates a PR using user credentials
+        """Creates a PR using user credentials.
 
         Args:
             repo_name: The full name of the repository (owner/repo)
@@ -66,7 +64,7 @@ class GitHubPRsMixin(GitHubMixinBase):
         return response['html_url']
 
     async def get_pr_details(self, repository: str, pr_number: int) -> dict:
-        """Get detailed information about a specific pull request
+        """Get detailed information about a specific pull request.
 
         Args:
             repository: Repository name in format 'owner/repo'

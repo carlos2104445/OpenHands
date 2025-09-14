@@ -31,7 +31,7 @@ async def submit_feedback(
 
     Args:
         request (Request): The incoming request object.
-        feedback (FeedbackDataModel): The feedback data to be stored.
+        conversation: The server conversation instance for this request.
 
     Returns:
         dict: The stored feedback data.

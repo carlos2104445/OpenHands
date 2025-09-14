@@ -55,7 +55,7 @@ async def list_files(
     ```
 
     Args:
-        request (Request): The incoming request object.
+        conversation: The server conversation instance for this request.
         path (str, optional): The path to list files from. Defaults to None.
 
     Returns:
@@ -137,7 +137,7 @@ async def select_file(
     Args:
         file (str): The path of the file to be retrieved.
             Expect path to be absolute inside the runtime.
-        request (Request): The incoming request object.
+        conversation: The server conversation instance for this request.
 
     Returns:
         dict: A dictionary containing the file content.

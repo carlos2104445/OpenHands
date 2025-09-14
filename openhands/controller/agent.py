@@ -58,6 +58,7 @@ class Agent(ABC):
 
     def get_system_message(self) -> 'SystemMessageAction | None':
         """Returns a SystemMessageAction containing the system message and tools.
+
         This will be added to the event stream as the first message.
 
         Returns:
@@ -103,8 +104,9 @@ class Agent(ABC):
 
     @abstractmethod
     def step(self, state: 'State') -> 'Action':
-        """Starts the execution of the assigned instruction. This method should
-        be implemented by subclasses to define the specific execution logic.
+        """Starts the execution of the assigned instruction.
+
+        This method should be implemented by subclasses to define the specific execution logic.
         """
         pass
 
@@ -164,7 +166,7 @@ class Agent(ABC):
         """Sets the list of MCP tools for the agent.
 
         Args:
-        - mcp_tools (list[dict]): The list of MCP tools.
+            mcp_tools: The list of MCP tools to set for the agent.
         """
         logger.info(
             f'Setting {len(mcp_tools)} MCP tools for agent {self.name}: {[tool["function"]["name"] for tool in mcp_tools]}'

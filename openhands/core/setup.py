@@ -44,11 +44,13 @@ def create_runtime(
 
     Args:
         config: The app config.
+        llm_registry: Optional LLM registry for managing language model configurations.
         sid: (optional) The session id. IMPORTANT: please don't set this unless you know what you're doing.
             Set it to incompatible value will cause unexpected behavior on RemoteRuntime.
         headless_mode: Whether the agent is run in headless mode. `create_runtime` is typically called within evaluation scripts,
             where we don't want to have the VSCode UI open, so it defaults to True.
         agent: (optional) The agent instance to use for configuring the runtime.
+        git_provider_tokens: Optional provider tokens for git authentication.
 
     Returns:
         The created Runtime instance (not yet connected or initialized).
@@ -121,8 +123,9 @@ def initialize_repository_for_runtime(
     immutable_provider_tokens: PROVIDER_TOKEN_TYPE | None = None,
     selected_repository: str | None = None,
 ) -> str | None:
-    """Initialize the repository for the runtime by cloning or initializing it,
-    running setup scripts, and setting up git hooks if present.
+    """Initialize the repository for the runtime by cloning or initializing it.
+
+    Running setup scripts, and setting up git hooks if present.
 
     Args:
         runtime: The runtime to initialize the repository for.
@@ -173,7 +176,8 @@ def create_memory(
         selected_repository: The repository to clone and start with, if any.
         repo_directory: The repository directory, if any.
         status_callback: Optional callback function to handle status updates.
-        conversation_instructions: Optional instructions that are passed to the agent
+        conversation_instructions: Optional instructions that are passed to the agent.
+        working_dir: The working directory path for the memory instance.
     """
     memory = Memory(
         event_stream=event_stream,

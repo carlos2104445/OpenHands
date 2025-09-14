@@ -9,8 +9,9 @@ from openhands.events.event import FileEditSource, FileReadSource
 @dataclass
 class FileReadAction(Action):
     """Reads a file from a given path.
+
     Can be set to read specific lines using start and end
-    Default lines 0:-1 (whole file)
+    Default lines 0:-1 (whole file).
     """
 
     path: str
@@ -31,8 +32,9 @@ class FileReadAction(Action):
 @dataclass
 class FileWriteAction(Action):
     """Writes a file to a given path.
+
     Can be set to write specific lines using start and end
-    Default lines 0:-1 (whole file)
+    Default lines 0:-1 (whole file).
     """
 
     path: str

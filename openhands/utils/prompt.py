@@ -29,7 +29,7 @@ class RepositoryInfo:
 
 @dataclass
 class ConversationInstructions:
-    """Optional instructions the agent must follow throughout the conversation while addressing the user's initial task
+    """Optional instructions the agent must follow throughout the conversation while addressing the user's initial task.
 
     Examples include
 
@@ -93,8 +93,7 @@ class PromptManager:
         return refine_prompt(system_message)
 
     def get_example_user_message(self) -> str:
-        """This is an initial user message that can be provided to the agent
-        before *actual* user instructions are provided.
+        """This is an initial user message that can be provided to the agent before *actual* user instructions are provided.
 
         It can be used to provide a demonstration of how the agent
         should behave in order to solve the user's task. And it may

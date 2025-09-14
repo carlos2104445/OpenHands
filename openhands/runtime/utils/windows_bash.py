@@ -1,7 +1,6 @@
-"""This module provides a Windows-specific implementation for running commands
-in a PowerShell session using the pythonnet library to interact with the .NET
-PowerShell SDK directly. This aims to provide a more robust and integrated
-way to manage PowerShell processes compared to using temporary script files.
+"""This module provides a Windows-specific implementation for running commands in a PowerShell session using the pythonnet library to interact with the .NET PowerShell SDK directly.
+
+This aims to provide a more robust and integrated way to manage PowerShell processes compared to using temporary script files.
 """
 
 import os
@@ -645,6 +644,7 @@ class WindowsPowershellSession:
 
     def execute(self, action: CmdRunAction) -> CmdOutputObservation | ErrorObservation:
         """Executes a command, potentially as a PowerShell background job for long-running tasks.
+
         Aligned with bash.py behavior regarding command execution and messages.
 
         Args:

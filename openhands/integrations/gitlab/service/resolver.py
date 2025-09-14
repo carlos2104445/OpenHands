@@ -5,9 +5,7 @@ from openhands.integrations.service_types import Comment
 
 
 class GitLabResolverMixin(GitLabMixinBase):
-    """
-    Helper methods used for the GitLab Resolver
-    """
+    """Helper methods used for the GitLab Resolver."""
 
     async def get_review_thread_comments(
         self, project_id: str, issue_iid: int, discussion_id: str
@@ -28,7 +26,7 @@ class GitLabResolverMixin(GitLabMixinBase):
         """Get the title and body of an issue or merge request.
 
         Args:
-            repository: Repository name in format 'owner/repo' or 'domain/owner/repo'
+            project_id: The GitLab project ID or path
             issue_number: The issue/MR IID within the project
             is_mr: If True, treat as merge request; if False, treat as issue;
                    if None, try issue first then merge request (default behavior)
@@ -59,10 +57,10 @@ class GitLabResolverMixin(GitLabMixinBase):
         """Get comments for an issue or merge request.
 
         Args:
-            repository: Repository name in format 'owner/repo' or 'domain/owner/repo'
+            project_id: The GitLab project ID or path
             issue_number: The issue/MR IID within the project
             max_comments: Maximum number of comments to retrieve
-            is_pr: If True, treat as merge request; if False, treat as issue;
+            is_mr: If True, treat as merge request; if False, treat as issue;
                    if None, try issue first then merge request (default behavior)
 
         Returns:

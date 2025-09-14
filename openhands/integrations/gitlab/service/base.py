@@ -13,15 +13,13 @@ from openhands.integrations.service_types import (
 
 
 class GitLabMixinBase(BaseGitService, HTTPClient):
-    """
-    Declares common attributes and method signatures used across mixins.
-    """
+    """Declares common attributes and method signatures used across mixins."""
 
     BASE_URL: str
     GRAPHQL_URL: str
 
     async def _get_headers(self) -> dict[str, Any]:
-        """Retrieve the GitLab Token to construct the headers"""
+        """Retrieve the GitLab Token to construct the headers."""
         if not self.token:
             latest_token = await self.get_latest_token()
             if latest_token:
@@ -87,7 +85,7 @@ class GitLabMixinBase(BaseGitService, HTTPClient):
     async def execute_graphql_query(
         self, query: str, variables: dict[str, Any] | None = None
     ) -> Any:
-        """Execute a GraphQL query against the GitLab GraphQL API
+        """Execute a GraphQL query against the GitLab GraphQL API.
 
         Args:
             query: The GraphQL query string

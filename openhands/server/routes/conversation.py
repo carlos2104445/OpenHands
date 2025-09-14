@@ -49,7 +49,7 @@ async def get_vscode_url(
     This endpoint allows getting the VSCode URL.
 
     Args:
-        request (Request): The incoming FastAPI request object.
+        conversation: The server conversation instance for this request.
 
     Returns:
         JSONResponse: A JSON response indicating the success of the operation.
@@ -81,7 +81,7 @@ async def get_hosts(
     This endpoint allows getting the hosts used by the runtime.
 
     Args:
-        request (Request): The incoming FastAPI request object.
+        conversation: The server conversation instance for this request.
 
     Returns:
         JSONResponse: A JSON response indicating the success of the operation.

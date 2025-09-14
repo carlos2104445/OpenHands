@@ -262,6 +262,7 @@ class CodeActAgent(Agent):
 
         Args:
             events: The list of events to convert to messages
+            initial_user_message: The initial user message action from the conversation history
 
         Returns:
             list[Message]: A list of formatted messages ready for LLM consumption, including:

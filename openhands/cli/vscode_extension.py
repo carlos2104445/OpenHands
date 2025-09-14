@@ -57,6 +57,7 @@ def download_latest_vsix_from_github() -> str | None:
 
 def attempt_vscode_extension_install():
     """Checks if running in a supported editor and attempts to install the OpenHands companion extension.
+
     This is a best-effort, one-time attempt.
     """
     # 1. Check if we are in a supported editor environment

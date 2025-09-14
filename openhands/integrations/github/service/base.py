@@ -14,9 +14,7 @@ from openhands.integrations.service_types import (
 
 
 class GitHubMixinBase(BaseGitService, HTTPClient):
-    """
-    Declares common attributes and method signatures used across mixins.
-    """
+    """Declares common attributes and method signatures used across mixins."""
 
     BASE_URL: str
     GRAPHQL_URL: str

@@ -40,7 +40,7 @@ WAIT_TIME_BEFORE_CLOSE_INTERVAL = 5
 
 
 class AgentSession:
-    """Represents a session with an Agent
+    """Represents a session with an Agent.
 
     Attributes:
         controller: The AgentController instance for controlling the agent.
@@ -70,7 +70,7 @@ class AgentSession:
         status_callback: Callable | None = None,
         user_id: str | None = None,
     ) -> None:
-        """Initializes a new instance of the Session class
+        """Initializes a new instance of the Session class.
 
         Parameters:
         - sid: The session ID
@@ -104,7 +104,8 @@ class AgentSession:
         conversation_instructions: str | None = None,
         replay_json: str | None = None,
     ) -> None:
-        """Starts the Agent session
+        """Starts the Agent session.
+
         Parameters:
         - runtime_name: The name of the runtime associated with the session
         - config:
@@ -222,7 +223,7 @@ class AgentSession:
                 )
 
     async def close(self) -> None:
-        """Closes the Agent session"""
+        """Closes the Agent session."""
         if self._closed:
             return
         self._closed = True
@@ -255,8 +256,9 @@ class AgentSession:
         agent_to_llm_config: dict[str, LLMConfig] | None,
         agent_configs: dict[str, AgentConfig] | None,
     ) -> MessageAction:
-        """Replays a trajectory from a JSON file. Note that once the replay session
-        finishes, the controller will continue to run with further user instructions,
+        """Replays a trajectory from a JSON file.
+
+        Note that once the replay session finishes, the controller will continue to run with further user instructions,
         so we still need to pass llm configs, budget, etc., even though the replay
         itself does not call LLM or cost money.
         """
@@ -303,7 +305,7 @@ class AgentSession:
         selected_repository: str | None = None,
         selected_branch: str | None = None,
     ) -> bool:
-        """Creates a runtime instance
+        """Creates a runtime instance.
 
         Parameters:
         - runtime_name: The name of the runtime associated with the session
@@ -393,7 +395,7 @@ class AgentSession:
         agent_configs: dict[str, AgentConfig] | None = None,
         replay_events: list[Event] | None = None,
     ) -> tuple[AgentController, bool]:
-        """Creates an AgentController instance
+        """Creates an AgentController instance.
 
         Parameters:
         - agent:

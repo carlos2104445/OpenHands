@@ -15,8 +15,9 @@ class ActionParseError(Exception):
 
 
 class ResponseParser(ABC):
-    """This abstract base class is a general interface for an response parser dedicated to
-    parsing the action from the response from the LLM.
+    """This abstract base class is a general interface for an response parser.
+
+    Dedicated to parsing the action from the response from the LLM.
     """
 
     def __init__(
@@ -63,8 +64,9 @@ class ResponseParser(ABC):
 
 
 class ActionParser(ABC):
-    """This abstract base class is a general interface for an action parser dedicated to
-    parsing the action from the action str from the LLM.
+    """This abstract base class is a general interface for an action parser.
+
+    Dedicated to parsing the action from the action str from the LLM.
     """
 
     @abstractmethod

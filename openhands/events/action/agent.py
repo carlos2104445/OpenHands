@@ -206,6 +206,7 @@ class CondensationRequestAction(Action):
 @dataclass
 class TaskTrackingAction(Action):
     """An action where the agent writes or updates a task list for task management.
+
     Attributes:
         task_list (list): The list of task items with their status and metadata.
         thought (str): The agent's explanation of its actions.

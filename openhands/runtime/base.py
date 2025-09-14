@@ -220,6 +220,7 @@ class Runtime(FileEditRuntimeMixin):
 
     def close(self) -> None:
         """This should only be called by conversation manager or closing the session.
+
         If called for instance by error handling, it could prevent recovery.
         """
         pass
@@ -322,7 +323,7 @@ class Runtime(FileEditRuntimeMixin):
             asyncio.get_event_loop().run_until_complete(self._handle_action(event))
 
     async def _export_latest_git_provider_tokens(self, event: Action) -> None:
-        """Refresh runtime provider tokens when agent attemps to run action with provider token"""
+        """Refresh runtime provider tokens when agent attemps to run action with provider token."""
         providers_called = ProviderHandler.check_cmd_action_for_provider_token_ref(
             event
         )
@@ -824,6 +825,7 @@ fi
         self, selected_repository: str | None
     ) -> list[BaseMicroagent]:
         """Load microagents from the selected repository.
+
         If selected_repository is None, load microagents from the current workspace.
         This is the main entry point for loading microagents.
 
@@ -889,6 +891,7 @@ fi
 
     def run_action(self, action: Action) -> Observation:
         """Run an action and return the resulting observation.
+
         If the action is not runnable in any runtime, a NullObservation is returned.
         If the action is not supported by the current runtime, an ErrorObservation is returned.
         """
@@ -1149,8 +1152,7 @@ fi
         return self.git_handler.get_git_diff(file_path)
 
     def get_workspace_branch(self, primary_repo_path: str | None = None) -> str | None:
-        """
-        Get the current branch of the workspace.
+        """Get the current branch of the workspace.
 
         Args:
             primary_repo_path: Path to the primary repository within the workspace.
@@ -1177,6 +1179,7 @@ fi
         self, callback: Callable[[str], None] | None = None
     ) -> bool:
         """Subscribe to shell command output stream.
+
         This method is meant to be overridden by runtime implementations
         that want to stream shell command output to external consumers.
 

@@ -4,9 +4,7 @@ from openhands.integrations.service_types import RequestMethod
 
 
 class BitBucketPRsMixin(BitBucketMixinBase):
-    """
-    Mixin for BitBucket pull request operations
-    """
+    """Mixin for BitBucket pull request operations."""
 
     async def create_pr(
         self,
@@ -51,7 +49,7 @@ class BitBucketPRsMixin(BitBucketMixinBase):
         return data.get('links', {}).get('html', {}).get('href', '')
 
     async def get_pr_details(self, repository: str, pr_number: int) -> dict:
-        """Get detailed information about a specific pull request
+        """Get detailed information about a specific pull request.
 
         Args:
             repository: Repository name in format 'owner/repo'

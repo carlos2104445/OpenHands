@@ -115,9 +115,7 @@ class VSCodePlugin(Plugin):
         )
 
     def _setup_vscode_settings(self) -> None:
-        """Set up VSCode settings by creating the .vscode directory in the workspace
-        and copying the settings.json file there.
-        """
+        """Set up VSCode settings by creating the .vscode directory in the workspace and copying the settings.json file there."""
         # Get the path to the settings.json file in the plugin directory
         current_dir = Path(__file__).parent
         settings_path = current_dir / 'settings.json'

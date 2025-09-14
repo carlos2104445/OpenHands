@@ -132,6 +132,7 @@ class BrowsingAgent(Agent):
 
     def step(self, state: State) -> Action:
         """Performs one step using the Browsing Agent.
+
         This includes gathering information on previous steps and prompting the model to make a browsing command to execute.
 
         Parameters:

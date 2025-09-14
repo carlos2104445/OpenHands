@@ -130,8 +130,7 @@ async def get_validated_input(
     default_value: str = '',
     enter_keeps_value: Optional[str] = None,
 ) -> str:
-    """
-    Get validated input from user.
+    """Get validated input from user.
 
     Args:
         session: PromptSession instance
@@ -146,7 +145,6 @@ async def get_validated_input(
     Returns:
         str: The validated input
     """
-
     session.completer = completer
     value = None
 

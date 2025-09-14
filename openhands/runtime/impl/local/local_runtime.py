@@ -122,6 +122,7 @@ def check_dependencies(code_repo_path: str, check_browser: bool) -> None:
 
 class LocalRuntime(ActionExecutionClient):
     """This runtime will run the action_execution_server directly on the local machine.
+
     When receiving an event, it will send the event to the server via HTTP.
 
     Args:

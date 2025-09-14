@@ -8,9 +8,7 @@ from openhands.server.types import AppMode
 
 
 class BitBucketReposMixin(BitBucketMixinBase):
-    """
-    Mixin for BitBucket repository-related operations
-    """
+    """Mixin for BitBucket repository-related operations."""
 
     async def search_repositories(
         self, query: str, per_page: int, sort: str, order: str, public: bool
@@ -80,7 +78,7 @@ class BitBucketReposMixin(BitBucketMixinBase):
         return repositories
 
     async def _get_user_workspaces(self) -> list[dict[str, Any]]:
-        """Get all workspaces the user has access to"""
+        """Get all workspaces the user has access to."""
         url = f'{self.BASE_URL}/workspaces'
         data, _ = await self._make_request(url)
         return data.get('values', [])
@@ -116,6 +114,7 @@ class BitBucketReposMixin(BitBucketMixinBase):
             per_page: The number of repositories per page
             sort: The sort field ('pushed', 'updated', 'created', 'full_name')
             installation_id: The workspace slug to fetch repositories from (as int, will be converted to string)
+            query: Optional search query to filter repositories by name.
 
         Returns:
             A list of Repository objects

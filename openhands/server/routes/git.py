@@ -251,6 +251,9 @@ async def get_repository_branches(
         repository: The repository name in the format 'owner/repo'
         page: Page number for pagination (default: 1)
         per_page: Number of branches per page (default: 30)
+        provider_tokens: Provider tokens for authentication
+        access_token: Access token for external authentication
+        user_id: User ID for authentication
 
     Returns:
         A paginated response with branches for the repository

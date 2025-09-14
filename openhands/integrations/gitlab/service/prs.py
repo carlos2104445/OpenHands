@@ -4,9 +4,7 @@ from openhands.integrations.service_types import RequestMethod
 
 
 class GitLabPRsMixin(GitLabMixinBase):
-    """
-    Methods for interacting with GitLab merge requests (PRs)
-    """
+    """Methods for interacting with GitLab merge requests (PRs)."""
 
     async def create_mr(
         self,
@@ -17,7 +15,7 @@ class GitLabPRsMixin(GitLabMixinBase):
         description: str | None = None,
         labels: list[str] | None = None,
     ) -> str:
-        """Creates a merge request in GitLab
+        """Creates a merge request in GitLab.
 
         Args:
             id: The ID or URL-encoded path of the project
@@ -59,7 +57,7 @@ class GitLabPRsMixin(GitLabMixinBase):
         return response['web_url']
 
     async def get_pr_details(self, repository: str, pr_number: int) -> dict:
-        """Get detailed information about a specific merge request
+        """Get detailed information about a specific merge request.
 
         Args:
             repository: Repository name in format 'owner/repo'

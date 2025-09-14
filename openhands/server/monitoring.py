@@ -22,6 +22,7 @@ class MonitoringListener:
 
     def on_agent_session_start(self, success: bool, duration: float) -> None:
         """Track an agent session start.
+
         Success is true if startup completed without error.
         Duration is start time in seconds observed by AgentSession.
         """
@@ -29,6 +30,7 @@ class MonitoringListener:
 
     def on_create_conversation(self) -> None:
         """Track the beginning of conversation creation.
+
         Does not currently capture whether it succeed.
         """
         pass

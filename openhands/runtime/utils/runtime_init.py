@@ -9,6 +9,7 @@ def init_user_and_working_directory(
     username: str, user_id: int, initial_cwd: str
 ) -> int | None:
     """Create working directory and user if not exists.
+
     It performs the following steps effectively:
     * Creates the Working Directory:
         - Uses mkdir -p to create the directory.

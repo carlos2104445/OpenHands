@@ -5,6 +5,7 @@ from openhands.events.action import Action, AgentFinishAction
 
 class AgentFinishedCritic(BaseCritic):
     """This is a simple rule-based critic that checks if the last event is an AgentFinishAction.
+
     If not, it will return a score of 0 and a message indicating that the agent did not finish.
     If the git patch is provided and is empty, it will return a score of 0 and a message indicating that the git patch is empty.
     """

@@ -1,4 +1,5 @@
 """This runtime runs commands locally using subprocess and performs file operations using Python's standard library.
+
 It does not implement browser functionality.
 """
 
@@ -88,8 +89,9 @@ After installing .NET SDK, restart your terminal and try again.
 
 
 class CLIRuntime(Runtime):
-    """A runtime implementation that runs commands locally using subprocess and performs
-    file operations using Python's standard library. It does not implement browser functionality.
+    """A runtime implementation that runs commands locally using subprocess and performs file operations using Python's standard library.
+
+    It does not implement browser functionality.
 
     Args:
         config (OpenHandsConfig): The application configuration.
@@ -193,6 +195,7 @@ class CLIRuntime(Runtime):
 
     def add_env_vars(self, env_vars: dict[str, Any]) -> None:
         """Adds environment variables to the current runtime environment.
+
         For CLIRuntime, this means updating os.environ for the current process,
         so that subsequent commands inherit these variables.
         This overrides the BaseRuntime behavior which tries to run shell commands
@@ -477,6 +480,7 @@ class CLIRuntime(Runtime):
 
     def run_ipython(self, action: IPythonRunCellAction) -> Observation:
         """Run a Python code cell.
+
         This functionality is not implemented in CLIRuntime.
         Users should also disable the Jupyter plugin in AgentConfig.
         """

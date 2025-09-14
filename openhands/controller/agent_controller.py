@@ -137,11 +137,23 @@ class AgentController:
         Args:
             agent: The agent instance to control.
             event_stream: The event stream to publish events to.
-            max_iterations: The maximum number of iterations the agent can run.
-            max_budget_per_task: The maximum budget (in USD) allowed per task, beyond which the agent will stop.
+            conversation_stats: Statistics and metrics for the conversation.
+            iteration_delta: The number of iterations to increase the limit by when needed.
+            budget_per_task_delta: The budget amount to increase the limit by when needed.
             agent_to_llm_config: A dictionary mapping agent names to LLM configurations in the case that
                 we delegate to a different agent.
             agent_configs: A dictionary mapping agent names to agent configurations in the case that
+                we delegate to a different agent.
+            sid: Session identifier for the agent controller.
+            file_store: File storage interface for persisting data.
+            user_id: Identifier of the user associated with this session.
+            confirmation_mode: Whether to enable confirmation mode for actions.
+            initial_state: Initial state to start the agent with.
+            is_delegate: Whether this controller is a delegate of another controller.
+            headless_mode: Whether to run in headless mode without user interaction.
+            status_callback: Optional callback function for status updates.
+            replay_events: Optional list of events to replay.
+            security_analyzer: Optional security analyzer for validating actions.
                 we delegate to a different agent.
             sid: The session ID of the agent.
             confirmation_mode: Whether to enable confirmation mode for agent actions.
