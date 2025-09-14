@@ -39,18 +39,15 @@ class CmdOutputMetadata(BaseModel):
     def to_ps1_prompt(cls) -> str:
         """Convert the required metadata into a PS1 prompt."""
         prompt = CMD_OUTPUT_PS1_BEGIN
-        json_str = json.dumps(
-            {
-                'pid': '$!',
-                'exit_code': '$?',
-                'username': r'\u',
-                'hostname': r'\h',
-                'working_dir': r'$(pwd)',
-                'py_interpreter_path': '$(which python 2>/dev/null || echo "")',
-            },
-            indent=2,
-        )
-        prompt += json_str
+        json_template = '''{
+  "pid": "${!:-null}",
+  "exit_code": "${?:-null}",
+  "username": "\\u",
+  "hostname": "\\h",
+  "working_dir": "$(pwd)",
+  "py_interpreter_path": "$(which python 2>/dev/null || echo null)"
+}'''
+        prompt += json_template
         prompt += CMD_OUTPUT_PS1_END + '\n'  # Ensure there's a newline at the end
         return prompt
 
@@ -58,21 +55,85 @@ class CmdOutputMetadata(BaseModel):
     def matches_ps1_metadata(cls, string: str) -> list[re.Match[str]]:
         matches = []
         for match in CMD_OUTPUT_METADATA_PS1_REGEX.finditer(string):
+            json_str = match.group(1).strip()
             try:
-                json.loads(match.group(1).strip())  # Try to parse as JSON
+                json.loads(json_str)
                 matches.append(match)
             except json.JSONDecodeError:
-                logger.warning(
-                    f'Failed to parse PS1 metadata: {match.group(1)}. Skipping.'
-                    + traceback.format_exc()
-                )
-                continue  # Skip if not valid JSON
+                if any(var in json_str for var in ['$!', '$?', '\\u', '\\h', '$(pwd)', '$(which']):
+                    logger.debug(f'Skipping PS1 template (not expanded): {json_str[:100]}...')
+                    continue
+                else:
+                    try:
+                        fixed_json = cls._fix_malformed_ps1_json(json_str)
+                        if fixed_json:
+                            json.loads(fixed_json)
+                            matches.append(match)
+                            logger.debug(f'Successfully fixed malformed PS1 JSON: {json_str[:50]}...')
+                        else:
+                            logger.warning(f'Could not fix malformed PS1 JSON: {json_str}. Skipping.')
+                            continue
+                    except json.JSONDecodeError:
+                        logger.warning(
+                            f'Failed to parse PS1 metadata: {json_str}. Skipping.'
+                            + traceback.format_exc()
+                        )
+                        continue
         return matches
+
+    @classmethod
+    def _fix_malformed_ps1_json(cls, json_str: str) -> str | None:
+        """Fix common JSON formatting issues from shell expansion."""
+        try:
+            lines = json_str.strip().split('\n')
+            if not lines[0].strip().startswith('{') or not lines[-1].strip().endswith('}'):
+                return None
+            
+            fixed_lines = []
+            for line in lines:
+                stripped = line.strip()
+                if stripped in ['{', '}']:
+                    fixed_lines.append(line)
+                elif ':' in stripped:
+                    indent = line[:len(line) - len(line.lstrip())]
+                    parts = stripped.split(':', 1)
+                    if len(parts) == 2:
+                        prop = parts[0].strip()
+                        value = parts[1].strip().rstrip(',')
+                        has_comma = parts[1].strip().endswith(',')
+                        
+                        if not (prop.startswith('"') and prop.endswith('"')):
+                            prop = f'"{prop}"'
+                        
+                        if value == 'null' or value.isdigit() or (value.startswith('"') and value.endswith('"')):
+                            quoted_value = value
+                        else:
+                            quoted_value = f'"{value}"'
+                        
+                        comma = ',' if has_comma else ''
+                        fixed_lines.append(f'{indent}{prop}: {quoted_value}{comma}')
+                    else:
+                        fixed_lines.append(line)
+                else:
+                    fixed_lines.append(line)
+            
+            return '\n'.join(fixed_lines)
+        except Exception:
+            return None
 
     @classmethod
     def from_ps1_match(cls, match: re.Match[str]) -> Self:
         """Extract the required metadata from a PS1 prompt."""
-        metadata = json.loads(match.group(1))
+        json_str = match.group(1).strip()
+        try:
+            metadata = json.loads(json_str)
+        except json.JSONDecodeError:
+            fixed_json = cls._fix_malformed_ps1_json(json_str)
+            if fixed_json:
+                metadata = json.loads(fixed_json)
+            else:
+                raise ValueError(f'Could not parse PS1 metadata: {json_str}')
+        
         # Create a copy of metadata to avoid modifying the original
         processed = metadata.copy()
         # Convert numeric fields
