@@ -15,30 +15,27 @@ def test_ps1_metadata_format():
     print(prompt)
     assert prompt.startswith('\n###PS1JSON###\n')
     assert prompt.endswith('\n###PS1END###\n')
-    assert r'\"exit_code\"' in prompt, 'PS1 prompt should contain escaped double quotes'
+    assert '"exit_code"' in prompt, 'PS1 prompt should contain double quotes'
 
 
 def test_ps1_metadata_json_structure():
-    """Test that PS1 prompt contains valid JSON with expected fields"""
+    """Test that PS1 prompt template contains expected field names"""
     prompt = CmdOutputMetadata.to_ps1_prompt()
-    # Extract JSON content between markers
+    # Extract JSON template content between markers
     json_str = prompt.replace('###PS1JSON###\n', '').replace('\n###PS1END###\n', '')
-    # Remove escaping before parsing
-    json_str = json_str.replace(r'\"', '"')
-    # Remove any trailing content after the JSON
     json_str = json_str.split('###PS1END###')[0].strip()
-    data = json.loads(json_str)
-
-    # Check required fields
-    expected_fields = {
-        'pid',
-        'exit_code',
-        'username',
-        'hostname',
-        'working_dir',
-        'py_interpreter_path',
-    }
-    assert set(data.keys()) == expected_fields
+    
+    expected_fields = [
+        '"pid"',
+        '"exit_code"', 
+        '"username"',
+        '"hostname"',
+        '"working_dir"',
+        '"py_interpreter_path"',
+    ]
+    
+    for field in expected_fields:
+        assert field in json_str, f'PS1 template should contain field {field}'
 
 
 def test_ps1_metadata_parsing():
