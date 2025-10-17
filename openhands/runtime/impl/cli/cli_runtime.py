@@ -56,9 +56,10 @@ if TYPE_CHECKING:
 
 # Import Windows PowerShell support if on Windows
 if sys.platform == 'win32':
+    from openhands.runtime.utils.windows_exceptions import DotNetMissingError
+
     try:
         from openhands.runtime.utils.windows_bash import WindowsPowershellSession
-        from openhands.runtime.utils.windows_exceptions import DotNetMissingError
     except (ImportError, DotNetMissingError) as err:
         # Print a user-friendly error message without stack trace
         friendly_message = """
