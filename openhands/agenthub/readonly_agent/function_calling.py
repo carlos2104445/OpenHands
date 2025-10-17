@@ -44,10 +44,9 @@ from openhands.events.tool import ToolCallMetadata
 def grep_to_cmdrun(
     pattern: str, path: str | None = None, include: str | None = None
 ) -> str:
-    # NOTE: This function currently relies on `rg` (ripgrep).
-    # `rg` may not be installed when using CLIRuntime or LocalRuntime.
-    # TODO: Implement a fallback to `grep` if `rg` is not available.
     """Convert grep tool arguments to a shell command string.
+
+    This function tries to use ripgrep (rg) first, but falls back to standard grep if rg is not available.
 
     Args:
         pattern: The regex pattern to search for in file contents
@@ -55,55 +54,56 @@ def grep_to_cmdrun(
         include: Optional file pattern to filter which files to search (e.g., "*.js")
 
     Returns:
-        A properly escaped shell command string for ripgrep
+        A properly escaped shell command string for searching files
     """
-    # Use shlex.quote to properly escape all shell special characters
     quoted_pattern = shlex.quote(pattern)
     path_arg = shlex.quote(path) if path else '.'
 
-    # Build ripgrep command
     rg_cmd = f'rg -li {quoted_pattern} --sortr=modified'
-
     if include:
         quoted_include = shlex.quote(include)
         rg_cmd += f' --glob {quoted_include}'
+    rg_complete = f'{rg_cmd} {path_arg} | head -n 100'
 
-    # Build the complete command
-    complete_cmd = f'{rg_cmd} {path_arg} | head -n 100'
+    # Fallback grep command
+    grep_cmd = f'grep -ril {quoted_pattern} {path_arg}'
+    if include:
+        quoted_include = shlex.quote(include)
+        grep_cmd += f' --include={quoted_include}'
+    grep_complete = f'{grep_cmd} | head -n 100'
 
-    # Add a header to the output
-    echo_cmd = f'echo "Below are the execution results of the search command: {complete_cmd}\n"; '
+    complete_cmd = f'if command -v rg >/dev/null 2>&1; then {rg_complete}; else {grep_complete}; fi'
+
+    echo_cmd = f'echo "Below are the execution results of the search command\n"; '
     return echo_cmd + complete_cmd
 
 
 def glob_to_cmdrun(pattern: str, path: str = '.') -> str:
-    # NOTE: This function currently relies on `rg` (ripgrep).
-    # `rg` may not be installed when using CLIRuntime or LocalRuntime
-    # TODO: Implement a fallback to `find` if `rg` is not available.
     """Convert glob tool arguments to a shell command string.
+
+    This function tries to use ripgrep (rg) first, but falls back to find if rg is not available.
 
     Args:
         pattern: The glob pattern to match files (e.g., "**/*.js")
         path: The directory to search in (defaults to current directory)
 
     Returns:
-        A properly escaped shell command string for ripgrep implementing glob
+        A properly escaped shell command string for file pattern matching
     """
-    # Use shlex.quote to properly escape all shell special characters
     quoted_path = shlex.quote(path)
     quoted_pattern = shlex.quote(pattern)
 
-    # Use ripgrep in a glob-only mode with -g flag and --files to list files
-    # This most closely matches the behavior of the NodeJS glob implementation
-    rg_cmd = f'rg --files {quoted_path} -g {quoted_pattern} --sortr=modified'
+    # Ripgrep command
+    rg_cmd = f'rg --files {quoted_path} -g {quoted_pattern} --sortr=modified | head -n 100'
 
-    # Sort results and limit to 100 entries (matching the Node.js implementation)
-    sort_and_limit_cmd = ' | head -n 100'
+    # Fallback find command - convert glob pattern to find-compatible pattern
+    find_pattern = pattern.replace('**/', '').replace('*', '*')
+    quoted_find_pattern = shlex.quote(find_pattern)
+    find_cmd = f'find {quoted_path} -type f -name {quoted_find_pattern} 2>/dev/null | head -n 100'
 
-    complete_cmd = f'{rg_cmd}{sort_and_limit_cmd}'
+    complete_cmd = f'if command -v rg >/dev/null 2>&1; then {rg_cmd}; else {find_cmd}; fi'
 
-    # Add a header to the output
-    echo_cmd = f'echo "Below are the execution results of the glob command: {complete_cmd}\n"; '
+    echo_cmd = f'echo "Below are the execution results of the glob command\n"; '
     return echo_cmd + complete_cmd
 
 

@@ -156,9 +156,6 @@ def parse_diff_header(text: str | list[str]) -> header | None:
         (unified_header_new_line, parse_unified_header),
         (context_header_old_line, parse_context_header),
         (diffcmd_header, parse_diffcmd_header),
-        # TODO:
-        # git_header can handle version-less unified headers, but
-        # will trim a/ and b/ in the paths if they exist...
         (git_header_new_line, parse_git_header),
     ]
 
