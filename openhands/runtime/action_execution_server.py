@@ -621,7 +621,8 @@ class ActionExecutor:
                 return browser_observation
             else:
                 downloaded_file_paths = []
-                for downloaded_file in new_downloads:
+                start_index = len(self.downloaded_files) - len(new_downloads) + 1
+                for idx, downloaded_file in enumerate(new_downloads):
                     src_path = os.path.join(self.downloads_directory, downloaded_file)
                     file_ext = ''
                     try:
@@ -635,7 +636,7 @@ class ActionExecutor:
 
                     tgt_path = os.path.join(
                         '/workspace',
-                        f'file_{len(self.downloaded_files) - len(new_downloads) + new_downloads.index(downloaded_file) + 1}{file_ext}',
+                        f'file_{start_index + idx}{file_ext}',
                     )
                     shutil.copy(src_path, tgt_path)
                     downloaded_file_paths.append(tgt_path)
@@ -648,7 +649,9 @@ class ActionExecutor:
 
                 file_download_obs = FileDownloadObservation(
                     content=content,
-                    file_path=downloaded_file_paths[0] if len(downloaded_file_paths) == 1 else ','.join(downloaded_file_paths),
+                    file_path=downloaded_file_paths[0]
+                    if len(downloaded_file_paths) == 1
+                    else ','.join(downloaded_file_paths),
                 )
                 return file_download_obs
 
