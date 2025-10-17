@@ -10,14 +10,19 @@ export function LoadingSpinner({ size }: LoadingSpinnerProps) {
     size === "small" ? "w-[25px] h-[25px]" : "w-[50px] h-[50px]";
 
   return (
-    <div data-testid="loading-spinner" className={cn("relative", sizeStyle)}>
+    <div
+      data-testid="loading-spinner"
+      className={cn("relative animate-in fade-in", sizeStyle)}
+    >
       <div
         className={cn(
-          "rounded-full border-4 border-[#525252] absolute",
+          "rounded-full border-4 border-gray-700 absolute",
           sizeStyle,
         )}
       />
-      <LoadingSpinnerOuter className={cn("absolute animate-spin", sizeStyle)} />
+      <LoadingSpinnerOuter
+        className={cn("absolute animate-spin text-blue-500", sizeStyle)}
+      />
     </div>
   );
 }

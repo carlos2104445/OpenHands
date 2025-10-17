@@ -27,10 +27,22 @@ export function CopyToClipboardButton({
       aria-label={t(
         mode === "copy" ? I18nKey.BUTTON$COPY : I18nKey.BUTTON$COPIED,
       )}
-      className="button-base p-1 cursor-pointer"
+      className="button-base p-1 cursor-pointer bg-gray-800/50 hover:bg-gray-700/70 rounded-md backdrop-blur-sm transition-all duration-200"
     >
-      {mode === "copy" && <CopyIcon width={15} height={15} />}
-      {mode === "copied" && <CheckmarkIcon width={15} height={15} />}
+      {mode === "copy" && (
+        <CopyIcon
+          width={15}
+          height={15}
+          className="transition-transform duration-200"
+        />
+      )}
+      {mode === "copied" && (
+        <CheckmarkIcon
+          width={15}
+          height={15}
+          className="text-green-500 animate-in fade-in scale-110"
+        />
+      )}
     </button>
   );
 }

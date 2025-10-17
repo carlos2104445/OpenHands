@@ -375,7 +375,7 @@ export function CustomChatInput({
         {/* Chat Input Component */}
         <div
           ref={chatContainerRef}
-          className="bg-[#25272D] box-border content-stretch flex flex-col items-start justify-center p-4 pt-3 relative rounded-[15px] w-full"
+          className="bg-gradient-to-br from-[#25272D] to-[#1f2228] box-border content-stretch flex flex-col items-start justify-center p-4 pt-3 relative rounded-[15px] w-full border border-gray-700/50 hover:border-blue-500/50 focus-within:border-blue-500 transition-all duration-300 shadow-lg hover:shadow-blue-500/20"
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
