@@ -2,8 +2,7 @@
 
 This directory contains the core components of OpenHands.
 
-This diagram provides an overview of the roles of each component and how they communicate and collaborate.
-![OpenHands System Architecture Diagram (July 4, 2024)](../docs/static/img/system_architecture_overview.png)
+For a comprehensive overview of the system architecture, including diagrams showing how components communicate and collaborate, please refer to the [Architecture Documentation](https://docs.all-hands.dev/usage/architecture/backend).
 
 ## Classes
 
